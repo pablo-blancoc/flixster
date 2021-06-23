@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
 
@@ -100,8 +101,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             // Use Glide library to load image into ImageView
             Glide.with(context)
                     .load(movie.getPosterPath())
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.poster_placeholder)
+                    .error(R.drawable.poster_placeholder)
                     .fitCenter()
                     .into(this.ivPoster);
         }
