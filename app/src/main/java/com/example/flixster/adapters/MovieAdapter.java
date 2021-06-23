@@ -97,7 +97,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
          */
         public void bind(Movie movie) {
             this.tvTitle.setText(movie.getTitle());
-            this.tvOverview.setText(movie.getOverview());
+
+            // Crop the overview if it is too long to show
+            String overview = movie.getOverview();
+            int maxLength = 120;
+            if(overview.length() > maxLength) {
+                overview = overview.substring(0, maxLength) + "...  \n[click to read more]";
+            }
+            this.tvOverview.setText(overview);
 
             // Set which image to load depending on orientation
             String imageUrl;
