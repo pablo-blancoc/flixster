@@ -2,6 +2,7 @@ package com.example.flixster.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,17 +101,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
             // Set which image to load depending on orientation
             String imageUrl;
+            int placeholder;
             if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageUrl = movie.getBackdropPath();
+                placeholder = R.drawable.backdrop_placeholder;
             } else {
                 imageUrl = movie.getPosterPath();
+                placeholder = R.drawable.poster_placeholder;
             }
 
             // Use Glide library to load image into ImageView
             Glide.with(context)
                     .load(imageUrl)
-                    .placeholder(R.drawable.poster_placeholder)
-                    .error(R.drawable.poster_placeholder)
+                    .placeholder(placeholder)
+                    .error(placeholder)
                     .fitCenter()
                     .into(this.ivPoster);
         }
