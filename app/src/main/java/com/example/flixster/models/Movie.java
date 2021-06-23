@@ -13,6 +13,7 @@ public class Movie {
     String posterPath;
     String title;
     String overview;
+    String backdropPath;
 
     /**
      * Constructor for the Movie class
@@ -20,9 +21,10 @@ public class Movie {
      * @throws JSONException: Exception thrown when a required key is not found on JSONObject
      */
     public Movie(JSONObject jsonObject) throws JSONException {
-        posterPath = jsonObject.getString("poster_path");
-        title = jsonObject.getString("title");
-        overview = jsonObject.getString("overview");
+        this.posterPath = jsonObject.getString("poster_path");
+        this.title = jsonObject.getString("title");
+        this.overview = jsonObject.getString("overview");
+        this.backdropPath = jsonObject.getString("backdrop_path");
     }
 
     /**
@@ -46,7 +48,15 @@ public class Movie {
      * @return String
      */
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+        return String.format("https://image.tmdb.org/t/p/w342/%s", this.posterPath);
+    }
+
+    /**
+     * Getter for backdrop path
+     * @return String
+     */
+    public String getBackdropPath() {
+        return String.format("https://image.tmdb.org/t/p/w342/%s", this.backdropPath);
     }
 
     /**
@@ -54,7 +64,7 @@ public class Movie {
      * @return String
      */
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -62,6 +72,6 @@ public class Movie {
      * @return String
      */
     public String getOverview() {
-        return overview;
+        return this.overview;
     }
 }
