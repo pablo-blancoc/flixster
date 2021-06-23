@@ -1,18 +1,22 @@
 package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.flixster.adapters.MovieAdapter;
 import com.example.flixster.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -29,6 +33,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Define RecyclerView
+        RecyclerView rvMovies = findViewById(R.id.rvMovies);
+
+        // Create MovieAdapter
+        this.movies = new ArrayList<>();
+        MovieAdapter movieAdapter = new MovieAdapter(this, this.movies);
+
+        // Set MovieAdapter on the RecyclerView
+        rvMovies.setAdapter(movieAdapter);
+
+        // Set a LayoutManager on the RecyclerView
+        rvMovies.setLayoutManager(new LinearLayoutManager(this));
+
         // Create a new instance of CodePath's AsyncHttpClient
         AsyncHttpClient client = new AsyncHttpClient();
 
@@ -36,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results.toString());
-                    movies = Movie.fromJsonArray(results);
-                    Log.i(TAG, "Movies: " + movies.size());
+
+                    // Populate our Movies array by adding them and notify movieAdapter
+                    movies.addAll(Movie.fromJsonArray(results));
+                    movieAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit JSON exception", e);
                     e.printStackTrace();
