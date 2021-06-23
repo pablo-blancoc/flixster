@@ -16,6 +16,7 @@ public class Movie {
     String title;
     String overview;
     String backdropPath;
+    Double voteAverage;
 
     /**
      * Empty constructor for Parcel library
@@ -34,6 +35,7 @@ public class Movie {
         this.title = jsonObject.getString("title");
         this.overview = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.voteAverage = jsonObject.getDouble("vote_average");
     }
 
     /**
@@ -74,6 +76,14 @@ public class Movie {
      */
     public String getTitle() {
         return this.title;
+    }
+
+    /**
+     * Getter for voteAverage
+     * @return String
+     */
+    public Double getVoteAverage() {
+        return this.voteAverage;
     }
 
     /**
