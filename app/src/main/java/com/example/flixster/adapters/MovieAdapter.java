@@ -98,7 +98,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             this.tvOverview.setText(movie.getOverview());
 
             // Use Glide library to load image into ImageView
-            Glide.with(context).load(movie.getPosterPath()).into(this.ivPoster);
+            Glide.with(context)
+                    .load(movie.getPosterPath())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .fitCenter()
+                    .into(this.ivPoster);
         }
     }
 
