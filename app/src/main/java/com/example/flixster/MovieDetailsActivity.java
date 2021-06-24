@@ -2,6 +2,7 @@ package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -11,6 +12,8 @@ import com.bumptech.glide.Glide;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -41,12 +44,24 @@ public class MovieDetailsActivity extends AppCompatActivity {
         this.tvOverview.setText(this.movie.getOverview());
         this.tvTitle.setText(this.movie.getTitle());
 
+        // Set which image to load depending on orientation
+        String imageUrl;
+        int placeholder;
+        if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            imageUrl = movie.getPosterPath();
+            placeholder = R.drawable.poster_placeholder;
+        } else {
+            imageUrl = movie.getBackdropPath();
+            placeholder = R.drawable.backdrop_placeholder;
+        }
+
         // Use Glide library to load image into ImageView
         Glide.with(this)
-                .load(this.movie.getBackdropPath())
-                .placeholder(R.drawable.backdrop_placeholder)
-                .error(R.drawable.backdrop_placeholder)
+                .load(imageUrl)
+                .placeholder(placeholder)
+                .error(placeholder)
                 .fitCenter()
+                .transform(new RoundedCornersTransformation(30, 10))
                 .into(this.ivImage);
 
         // Set Vote Average
