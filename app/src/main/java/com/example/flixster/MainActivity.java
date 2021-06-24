@@ -26,7 +26,7 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
 
     // Global variables
-    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=93629c9ddb114bcf791bc7792e318580";
+    public final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + this.getString(R.string.TMDB_API_KEY);
     public static final String TAG = "MainActivity";
     List<Movie> movies;
 
