@@ -20,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/ivPoster"
-        android:textColor="#322F2F"
+        android:textColor="#f6f7f9"
         android:textSize="24sp"
         android:textStyle="bold"
         tools:text="Avengers: The Age of Ultron" />
@@ -33,5 +33,6 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivPoster"
+        android:textColor="#7f8790"
         tools:text="ajshdkjash kljahsl dkjaslkj dlkasj ldkjsal kdjlsakj dlkajsld kjsa lkjds lkajdl askjd laksjd lksaj laksjdl kasjdlaks jlj slkdjas lkdj laskj dlkjs lkjd laskj d" />
 </RelativeLayout>
