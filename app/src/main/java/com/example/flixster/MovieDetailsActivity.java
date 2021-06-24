@@ -2,12 +2,14 @@ package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.flixster.databinding.ActivityMovieDetailsBinding;
@@ -61,7 +63,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
         float voteAverage = this.movie.getVoteAverage().floatValue();
         binding.rbVoteAverage.setRating(voteAverage / 2.0f);
 
-
+        binding.ivImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( movie.getVideoId() == null ) {
+                    Toast.makeText(MovieDetailsActivity.this, "No video available", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    // Create intent and start activity
+                    Toast.makeText(MovieDetailsActivity.this, "Showing video", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+                    intent.putExtra("videoId", movie.getVideoId());
+                    MovieDetailsActivity.this.startActivity(intent);
+                }
+            }
+        });
     }
 
 }
