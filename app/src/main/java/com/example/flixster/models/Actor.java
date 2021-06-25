@@ -3,10 +3,12 @@ package com.example.flixster.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Actor {
 
     // Attributes
@@ -14,6 +16,13 @@ public class Actor {
     String name;
     String profilePicture;
     String character;
+
+    /**
+     * Empty constructor for Parcel library
+     */
+    public Actor() {
+
+    }
 
     /**
      * Constructor for Actor from JSONObject
@@ -51,7 +60,7 @@ public class Actor {
     }
 
     public String getProfilePicture() {
-        return profilePicture;
+        return String.format("https://image.tmdb.org/t/p/w342/%s", this.profilePicture);
     }
 
     public String getCharacter() {

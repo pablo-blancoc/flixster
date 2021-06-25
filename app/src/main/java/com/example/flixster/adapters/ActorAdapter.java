@@ -44,7 +44,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
      * Inflate a layout defined in XML layouts and returns it inside a ViewGroup (wrapped)
      * @param parent: the ViewGroup to which it is a child of
      * @param viewType: what is the type of view
-     * @return
+     * @return ViewHolder
      */
     @NonNull
     @Override

@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.flixster.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +26,11 @@ public class Movie {
     Double voteAverage;
     int id;
     String videoId;
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
     List<Actor> actors;
 
     /**
@@ -79,7 +83,7 @@ public class Movie {
             }
         });
 
-        // Create a GET request to get creadits of movie
+        // Create a GET request to get credits of movie
         client.get("https://api.themoviedb.org/3/movie/" + this.id + "/credits?api_key=" + api_key, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
