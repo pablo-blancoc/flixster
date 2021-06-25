@@ -41,4 +41,20 @@ public class Actor {
 
         return actors;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
 }
