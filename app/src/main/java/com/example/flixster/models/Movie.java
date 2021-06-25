@@ -59,8 +59,11 @@ public class Movie {
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
                     JSONObject result = results.getJSONObject(0);
-                    videoId = result.getString("key");
-
+                    if(result.getString("site").equals("YouTube")) {
+                        videoId = result.getString("key");
+                    } else {
+                        videoId = null;
+                    }
                 } catch (JSONException e) {
                     Log.d("Movie", "No video available", e);
                     videoId = null;
