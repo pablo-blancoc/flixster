@@ -27,6 +27,7 @@ public class Movie {
     Double voteAverage;
     int id;
     String videoId;
+    List<Actor> actors;
 
     /**
      * Empty constructor for Parcel library
@@ -64,6 +65,28 @@ public class Movie {
                 } catch (JSONException e) {
                     Log.d("Movie", "No video available", e);
                     videoId = null;
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                Log.d("Movie", "onFailure");
+                videoId = null;
+            }
+        });
+
+        // Create a GET request to get creadits of movie
+        client.get("https://api.themoviedb.org/3/movie/" + this.id + "/credits?api_key=" + api_key, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray cast = jsonObject.getJSONArray("cast");
+                    actors = Actor.fromJsonArray(cast);
+
+                } catch (JSONException e) {
+                    Log.d("Movie", "No credits available", e);
                     e.printStackTrace();
                 }
             }
