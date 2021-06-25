@@ -26,13 +26,16 @@ import okhttp3.Headers;
 public class MainActivity extends AppCompatActivity {
 
     // Global variables
-    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=93629c9ddb114bcf791bc7792e318580";
+    public String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
     public static final String TAG = "MainActivity";
+    String API_KEY;
     List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.API_KEY = this.getString(R.string.TMDB_API_KEY);
 
         // Started to use ViewBinding
         // setContentView(R.layout.activity_main); [NO LONGER NEEDED BECAUSE OF VIEWBINDING]
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
 
         // Create a GET request to get current playing movies
-        client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
+        client.get(NOW_PLAYING_URL + this.API_KEY, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Headers headers, JSON json) {
                 JSONObject jsonObject = json.jsonObject;
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray results = jsonObject.getJSONArray("results");
 
                     // Populate our Movies array by adding them and notify movieAdapter
-                    movies.addAll(Movie.fromJsonArray(results));
+                    movies.addAll(Movie.fromJsonArray(results, API_KEY));
                     movieAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
