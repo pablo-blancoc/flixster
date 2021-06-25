@@ -31,13 +31,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/pablo-blancoc/flixster/blob/main/walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LICEcap](https://www.cockos.com/licecap/)
 
 ## Notes
 
-The most challenging part of the app was an error that prevented de RecyclerView of the cast to load in full size, so images would load in a small size and then as you scroll the would grow bigger. This was solved hard-coding the width and height values of different components with help of TA Lance (thanks!).
+The most challenging part of the app was an error that prevented de RecyclerView of the cast to load in full size, so images would load in a small size and then as you scroll they would grow bigger. This was solved hard-coding the width and height values of different components with help of TA Lance (thanks!).
 
 ## Open-source libraries used
 
